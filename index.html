@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fitness Trainer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- MediaPipe Pose & Camera Utilities -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="glass-card screen">
+            <h1 class="glow-text">AI Fitness Trainer</h1>
+            <p>Your personal AI powered real-time posture & rep tracking trainer.</p>
+            <button id="btn-start-workout" class="btn primary-btn">Start Workout</button>
+        </div>
+
+        <!-- Workout Screen -->
+        <div id="workout-screen" class="screen hidden">
+            <header class="header-card glass-card">
+                <div class="header-top">
+                    <span id="ex-number" class="badge">Exercise 1 of 5</span>
+                    <button id="btn-switch-cam" class="btn icon-btn">📷 Flip Cam</button>
+                </div>
+                <h2 id="ex-title">Squats</h2>
+                <div class="progress-bar-bg">
+                    <div id="workout-progress" class="progress-bar-fill"></div>
+                </div>
+            </header>
+
+            <div class="camera-wrapper glass-card">
+                <video id="webcam" playsinline muted></video>
+                <canvas id="skeleton-canvas"></canvas>
+                <div id="pose-indicator" class="status-indicator status-green">Posture Good</div>
+            </div>
+
+            <div class="stats-card glass-card">
+                <div class="stat-box">
+                    <span class="stat-label">REMAINING</span>
+                    <span id="stat-remaining" class="stat-value">10</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">COMPLETED REPS</span>
+                    <span id="stat-reps" class="stat-value">0</span>
+                </div>
+            </div>
+
+            <div id="guide-box" class="guide-card glass-card">
+                <p id="guide-text">Stand straight with feet shoulder-width apart.</p>
+            </div>
+
+            <div class="controls-card">
+                <button id="btn-pause" class="btn secondary-btn">Pause</button>
+                <button id="btn-resume" class="btn secondary-btn hidden">Resume</button>
+                <button id="btn-finish" class="btn danger-btn">Finish</button>
+            </div>
+        </div>
+
+        <!-- Completion Screen -->
+        <div id="summary-screen" class="glass-card screen hidden">
+            <h1 class="glow-text">Workout Complete! 🎉</h1>
+            <p>Great job completing your session!</p>
+            <div class="summary-stats">
+                <div class="stat-row"><span>Exercises Finished:</span><strong id="sum-ex">5</strong></div>
+                <div class="stat-row"><span>Total Reps:</span><strong id="sum-reps">70</strong></div>
+                <div class="stat-row"><span>Workout Time:</span><strong id="sum-time">00:00</strong></div>
+                <div class="stat-row"><span>Est. Calories Burned:</span><strong id="sum-calories">0 kcal</strong></div>
+            </div>
+            <button id="btn-restart" class="btn primary-btn">Restart Workout</button>
+        </div>
+    </div>
+
+    <!-- Application JavaScript Modules -->
+    <script src="js/voice.js"></script>
+    <script src="js/exercise.js"></script>
+    <script src="js/camera.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/workout.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
